@@ -1,0 +1,1 @@
+Break can return a value if it is passed an argument. That value will be the return value of the loop. If no argument is given, then the break method will return 'nil', and the loop's return value will then be that as well.
