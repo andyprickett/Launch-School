@@ -1,0 +1,9 @@
+puts "number = " + "5397"
+thou = 5397 / 1000
+puts "thousands = " + thou.to_s
+hund = 5397 % 1000 / 100
+puts "hundreds = " + hund.to_s
+tens = 5397 % 100 / 10
+puts "tens = " + tens.to_s
+ones = 5397 % 10
+puts "ones = " + ones.to_s
