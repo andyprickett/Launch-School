@@ -1,1 +1,1 @@
-101-109 - Small Problems exercises
+101-109 - Small Problems
