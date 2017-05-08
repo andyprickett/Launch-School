@@ -1,2 +1,1 @@
-# README #
-# ls-101-programming-foundations
+101 Programming Foundations
