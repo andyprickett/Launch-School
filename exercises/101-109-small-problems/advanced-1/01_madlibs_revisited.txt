@@ -1,0 +1,4 @@
+The %{adjective} %{color} %{noun} %{adverb}
+%{verb}s the %{adjective} %{color}
+%{noun}, who %{adverb} %{verb}s %{gender}
+%{noun} and %{verb}s around.
