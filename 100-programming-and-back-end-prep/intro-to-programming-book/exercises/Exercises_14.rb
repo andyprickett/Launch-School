@@ -9,9 +9,9 @@ contacts_keys = [:email, :address, :phone]
  i = 0
  j = 0
 
-contacts.each_pair do |contact, contact_info_hash|
+contacts.each_pair do |contact, data|
   contacts_keys.each do |key|
-    contact_info_hash[key] = contact_data[i][j]
+    data[key] = contact_data[i][j]
     j += 1
   end
   i += 1
