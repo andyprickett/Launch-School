@@ -12,58 +12,63 @@ end
 
 def validated_and_converted_or_passed_through(user_input)
   matches = first_letter_matching_choices(user_input)
-  if VALID_CHOICES.include?(user_input)
-    user_input
-  elsif matches.nil?
-    user_input
-  else
+  if VALID_CHOICES.include?(user_input) || matches.empty?
+    user_input # pass through either an already complete user_input or a total miss
+  else # turn the user_input into something usable
     matched_and_converted(user_input, matches)
   end
 end
 
 def first_letter_matching_choices(user_input)
-  matches = VALID_CHOICES.select do |valid_choice|
+  # return an array of all the available valid choices whose first letter 
+  # matches the first letter of the user input
+  VALID_CHOICES.select do |valid_choice|
     user_input[0] == valid_choice[0]
   end
-  if matches.empty?
-    matches = nil
-  end
-  matches
 end
 
 def matched_and_converted(user_input, matches)
-  if matches.length > 1
+  if matches.length > 1 # there's 2 or more valid choices with the same first
+                        # letter! uh oh!
     if need_another_letter?(user_input, matches)
       user_input = get_another_letter_from_user(user_input, matches)
+      # give them a chance to provide a second letter that, when paired with
+      # the already-matched first letter, will create a match to one of the
+      # available valid choices. this is now the user_input!
     end
     second_letter_matches(user_input, matches)[0]
+    # we either had already or went and got a second letter, and the first
+    # 2 letters of the user input match 1 of our available valid choices.
+    # we return from this method the first element in that array
   else
-    matches[0]
+    matches[0] # there was only one match based on the first letter, so that
+               # is the only available valid choice. first (only) element of 
+               # that array is returned
   end
 end
 
 def need_another_letter?(user_input, matches)
-  second_letter_matches = second_letter_matches(user_input, matches)
-  if second_letter_matches.empty? || only_one_letter?(user_input)
-    true
-  else
-    false
-  end
+  second_letter_matches(user_input, matches).empty? ||
+  only_one_letter?(user_input)
+  # the second letter provided by the user, when combined with the first
+  # letter, doesn't match the first 2 letters of any available valid choices
+  # OR
+  # they only provided 1 letter (and it matches multiple available valid
+  # choices)
+  # if either of these, we return true, meaning, we need to get another letter
 end
 
 def second_letter_matches(user_input, matches)
-  second_letter_matches = matches.select do |matched|
+  # return an array of the available valid choices where both the first AND
+  # second letter match the user input
+  matches.select do |matched|
     user_input[0..1] == matched[0..1]
   end
-  second_letter_matches
 end
 
 def only_one_letter?(user_input)
-  if user_input[1].nil?
-    true
-  else
-    false
-  end
+  # no second letter given by user?
+  user_input.strip[1].nil?
 end
 
 def get_another_letter_from_user(user_input, matches)
@@ -71,7 +76,7 @@ def get_another_letter_from_user(user_input, matches)
   second_letter = nil
   loop do
     prompt("Please add a second letter to distinguish your choice...")
-    second_letter = Kernel.gets().chomp().downcase
+    second_letter = Kernel.gets().chomp().downcase.strip
     if second_letter.empty? || second_letter_sucks?(second_letter, matches)
       prompt("None of the choices have that second letter...")
     else
@@ -80,18 +85,19 @@ def get_another_letter_from_user(user_input, matches)
     end
   end
   user_input[0].downcase + second_letter[0].downcase
+  # they might've entered more than 1 letter for their 'second letter'
+  # (those pesky users)
 end
 
 def second_letter_sucks?(second_letter, matches)
-  second_letter = matches.select do |match|
-    second_letter[0] == match[1]
-  end
-  if second_letter.empty?
-    true
-  else
-    false
-  end
+  matches.select { |match| second_letter[0] == match[1] }.empty?
+  # the letter provided as a 'second letter' doesn't match any of the second
+  # letters of any of the available valid choices we've already matched?
 end
+
+# THIS CODE IS NOT GOOD. IT WON'T SCALE UP TO MORE OPTIONS, MORE MATCHES OF
+# MORE LETTERS, ETC. IT IS TOO SPECIFIC FOR THIS ONE CASE AND CAN'T EASILY
+# BE ADAPTED TO EXPANDED REQUIREMENTS.
 
 def win?(first, second)
   WINNERS[first].include?(second)
