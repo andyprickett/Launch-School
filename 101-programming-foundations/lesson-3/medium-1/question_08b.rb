@@ -16,6 +16,6 @@ end
 mess_with_demographics(munsters)
 # Yes, there will be changes. We are looping through the actual hash that
 # has been passed in, because 'demo_hash' is a reference to the object id
-# of the actual munsters hash. So the changes made in the each block will
-# affect that original hash 'munsters'.
+# of the actual munsters hash. So the changes (reassignments of values)
+# made in the each block will affect that original hash 'munsters'.
 p munsters

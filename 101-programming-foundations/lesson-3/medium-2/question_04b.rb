@@ -13,4 +13,4 @@ puts "My string looks like this now: #{my_string}"
 puts "My array looks like this now: #{my_array}"
 # ["pumpkins"], because the method variable an_array_param is just
 # reassigned to a different object, which doesn't affect the array
-# object that was referred to by the passed in parameter
+# object that was referred to by the passed in parameter.

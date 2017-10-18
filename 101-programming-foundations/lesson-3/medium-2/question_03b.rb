@@ -11,5 +11,5 @@ puts "My string looks like this now: #{my_string}"
 # "pumpkins", because the attempted modification inside the method
 # is just a reassignment to the method's local version of the variable
 puts "My array looks like this now: #{my_array}"
-# ["pumpkins", "rutabaga"], because the operation mutates the caller, 
-# so it modifies the object that the method's variable refers to.
+# ["pumpkins", "rutabaga"], because the operation in the method mutates
+# the caller, so it modifies the object that the method's variable refers to.

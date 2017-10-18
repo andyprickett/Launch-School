@@ -7,7 +7,7 @@ def factors(number)
     divisors << number / dividend if number % dividend == 0
     dividend -= 1
   end
-  # the while loop return nil, so in order to return the data we created we
+  # the while loop returns nil, so in order to return the data we created we
   # must just place it as the last line of the method
   divisors
 end

@@ -16,4 +16,5 @@ else
   puts "100 is not between 10 and 100 (exclude_end? = true)"
 end
 
-# cover?, not include?
+# cover?, not include? cover? because we just want to know if 42 is within the
+# range, whereas include? asks if it is an element of the range.

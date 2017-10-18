@@ -7,4 +7,5 @@ puts greetings  # => {:a=>"hi there"}
 
 # informal_greeting is pointing to the mutable object 'hi' that is accessed
 # by greetings[:a]. so the method << modifies the object that informal_greeting
-# points to, and changes it to 'hi there'.
+# points to, and changes it to 'hi there'. therefore, the contents of the
+# greetings hash are now different, the value for the key :a is 'hi there'.
